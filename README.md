@@ -1,2 +1,2 @@
 # Guppy-backend
- Backend of app Guppy
+ Backend of app Guppy.
