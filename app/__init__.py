@@ -16,6 +16,7 @@ ma = Marshmallow(app)
 jwt = JWTManager(app)
 
 # Migrate database
-from models.models import User
+from models.endereco import Estado, Cidade, Bairro, Logradouro, Endereco
+from models.pessoa import Academia, Pessoa, Aluno, Professor
 migrate = Migrate(app, db)
 migrate.init_app(app, db)

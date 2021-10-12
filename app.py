@@ -1,15 +1,17 @@
 from app import app
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
-from models.models import User, db
+from models.pessoa import Pessoa, db
 
 @app.route("/registry", methods=["POST"])
 def registry():
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
+    nome = request.json.get("nome", None)
+    senha = request.json.get("senha", None)
     email = request.json.get("email", None)
+    cpf = request.json.get("cpf", None)
+    data_nasc = request.json.get("data_nasc", None)
 
-    user = User(username, email, password)
+    user = Pessoa(nome, email, senha, cpf, data_nasc)
     db.session.add(user)
     db.session.commit()
 
@@ -20,9 +22,9 @@ def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
 
-    user = User.query.filter_by(email=email).first()
+    user = Pessoa.query.filter_by(email=email).first()
     if not user or not user.verify_password(password):
-        return jsonify({"msg": "Bad username or password"}), 401
+        return jsonify({"msg": "Usuário ou senha inválida."}), 401
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
