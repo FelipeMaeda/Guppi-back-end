@@ -1,6 +1,4 @@
-class Estado(db.Model):
-    id_estado = db.Column(db.Integer, primary_key=True)
-    UF = db.Column(db.String(2), unique=True, nullable=False)
+from app import db
 
 # class Cidade(db.Model):
 #     id_cidade = db.Column(db.Integer, primary_key=True)
