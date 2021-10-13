@@ -1,4 +1,5 @@
 from app import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Academia(db.Model):
     __tablename__ = "academia"
@@ -16,9 +17,9 @@ class Pessoa(db.Model):
     senha = db.Column(db.String(300), nullable=False)
     cpf = db.Column(db.String(11), nullable=False, unique=True)
     data_nasc = db.Column(db.DateTime)
-    id_endereco = db.Column(db.Integer, db.ForeignKey('endereco.id'), nullable=False)
-    id_academia = db.Column(db.Integer, db.ForeignKey('academia.id'), nullable=False)
-    status = db.Column(db.Boolean, nullable=False)
+    id_endereco = db.Column(db.Integer, db.ForeignKey('endereco.id'))
+    id_academia = db.Column(db.Integer, db.ForeignKey('academia.id'))
+    status = db.Column(db.Boolean)
 
     # Authentication Flask JWT Extended
     def __init__(self, nome, email, senha, cpf, data_nasc):
