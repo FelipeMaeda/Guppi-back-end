@@ -18,5 +18,6 @@ jwt = JWTManager(app)
 # Migrate database
 from models.endereco import Estado, Cidade, Bairro, Logradouro, Endereco
 from models.pessoa import Academia, Pessoa, Aluno, Professor
+from models.treino import Treino, Tipo_musculo, Musculo, Ficha, Ficha_exercicio, Exercicio, Serie
 migrate = Migrate(app, db)
 migrate.init_app(app, db)
