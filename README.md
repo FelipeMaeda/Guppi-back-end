@@ -41,7 +41,7 @@ flask db migrate
 flask db upgrade
 ```
 
-Start the server
+### Start the server
 
 ```sh
 python app.py
