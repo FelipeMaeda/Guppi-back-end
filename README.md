@@ -3,10 +3,10 @@ Guppi-backend is the back-end code from de app Guppi. This project is associated
 
 ![alt-text](prototype.gif)
 
-### Installation
+# Installation
 To install this application you will need Python and free Mysql. 
 
-# For Windows
+### For Windows
 Clone this repo and install the dependencies.
 
 ```sh
@@ -17,7 +17,7 @@ python -m venv .\venv
 pip install -r requirements.txt
 ```
 
-# For Linux
+### For Linux
 Clone this repo and install the dependencies.
 
 ```sh
@@ -28,12 +28,12 @@ source ./venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-### Usage
+# Usage
 
-# Configuration
+### Configuration
 To run this app, you need to change credentials and configs in the file "app/config.py". The next step is create a database in your MySQL with the name you have configured.
 
-# Init DB for the App
+### Init DB for the App
 
 ```sh
 flask db init
