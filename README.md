@@ -50,5 +50,5 @@ python app.py
 or
 
 ```sh
-python app.py
+./app.py
 ```
