@@ -1,22 +1,56 @@
+import datetime
 from app import app
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
-from models.pessoa import Pessoa, db
+from models.pessoa import Pessoa, Aluno, Professor, db
+from models.treino import Treino, Ficha, Ficha_exercicio
 from schemas.pessoa import PessoaSchema
+from schemas.treino import TreinoSchema
+from werkzeug.security import generate_password_hash
 
-@app.route("/registry_user", methods=["POST"])
-def registry():
+@app.route("/cadastrar", methods=["POST"])
+def cadastrar():
+    # Vars to commit
     nome = request.json.get("nome", None)
-    senha = request.json.get("senha", None)
+    senha = generate_password_hash(request.json.get("senha", None))
     email = request.json.get("email", None)
     cpf = request.json.get("cpf", None)
     data_nasc = request.json.get("data_nasc", None)
+    usuario = request.json.get("usuario", None)
 
-    user = Pessoa(nome, email, senha, cpf, data_nasc)
-    db.session.add(user)
-    db.session.commit()
+    # Insert User Table
+    user = Pessoa(nome=nome, email=email, senha=senha, cpf=cpf, data_nasc=data_nasc)
 
-    return "ok"
+    # Insert Aluno or Professor table
+    if usuario == "aluno":
+        # Vars
+        inicio = request.json.get("inicio", None)
+        meta = request.json.get("meta", None)
+        objetivo = request.json.get("objetivo", None)
+
+        # Insert User
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except:
+            return jsonify(error="Data existing or wrong."), 409
+        # Insert Aluno
+        aluno = Aluno(id_pessoa=user.id, inicio=inicio, meta=meta, objetivo=objetivo)
+        db.session.add(aluno)
+    elif usuario == "professor":
+        # Insert User
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except:
+            return jsonify(error="Data existing or wrong."), 409
+        # Insert Professor
+        professor = Professor(id_pessoa=user.id)
+        db.session.add(professor)
+    else:
+        return jsonify(error="Please chose a correct user type."), 403
+
+    return jsonify(user_created=email), 200
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -37,13 +71,22 @@ def protected():
     email = get_jwt_identity()
     return jsonify(logged_in_as=email), 200
 
-@app.route("/profile", methods=["GET"])
+@app.route("/perfil", methods=["GET"])
 @jwt_required()
-def profile():
+def perfil():
     # Access the identity of the current user with get_jwt_identity
     email = get_jwt_identity()
-    user = PessoaSchema()
-    return user.dump(Pessoa(email=email)), 200
+    user_schema = PessoaSchema()
+    user = Pessoa.query.filter_by(email=email).first()
+    return user_schema.dump(user), 200
+
+@app.route("/treino", methods=["GET"])
+@jwt_required()
+def treino():
+    email = get_jwt_identity()
+    training_schema = TreinoSchema()
+    training = Treino.query.filter_by(email=email)
+    return training_schema.dump(training), 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5001")

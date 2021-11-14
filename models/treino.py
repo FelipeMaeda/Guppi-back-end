@@ -45,7 +45,7 @@ class Serie(db.Model):
 class Treino(db.Model):
     __tablename__ = "treino"
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#    id_aluno = db.Column(db.Integer, db.ForeignKey('aluno.id'), nullable=False)
+    id_aluno = db.Column(db.Integer, db.ForeignKey('aluno.id'), nullable=False)
     id_professor = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
     id_ficha = db.Column(db.Integer, db.ForeignKey('ficha.id'), nullable=False)
     id_musculo = db.Column(db.Integer, db.ForeignKey('musculo.id'), nullable=False)

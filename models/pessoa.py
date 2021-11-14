@@ -22,12 +22,12 @@ class Pessoa(db.Model):
     status = db.Column(db.Boolean)
 
     # Authentication Flask JWT Extended
-    def __init__(self, nome, email, senha, cpf, data_nasc):
-        self.nome = nome
-        self.email = email
-        self.senha = generate_password_hash(senha)
-        self.cpf = cpf
-        self.data_nasc = data_nasc
+    # def __init__(self, nome, email, senha, cpf, data_nasc):
+    #     self.nome = nome
+    #     self.email = email
+    #     self.senha = generate_password_hash(senha)
+    #     self.cpf = cpf
+    #     self.data_nasc = data_nasc
 
     def verify_password(self, senha):
         return check_password_hash(self.senha, senha)

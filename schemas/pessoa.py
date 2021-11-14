@@ -12,10 +12,9 @@ class AcademiaSchema(ma.SQLAlchemySchema):
     quant_aluno = ma.auto_field()
     id_endereco = ma.auto_field()
 
-class PessoaSchema(ma.SQLAlchemyAutoSchema):
+class PessoaSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Pessoa
-        include_fk = True
 
     id = ma.auto_field()
     nome = ma.auto_field()
@@ -26,7 +25,7 @@ class PessoaSchema(ma.SQLAlchemyAutoSchema):
     id_academia = ma.auto_field()
     status = ma.auto_field()
 
-class AlunoSchema(ma.SQLAlchemyAutoSchema):
+class AlunoSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Aluno
         include_fk = True
@@ -37,7 +36,7 @@ class AlunoSchema(ma.SQLAlchemyAutoSchema):
     meta = ma.auto_field()
     objetivo = ma.auto_field()
 
-class ProfessorSchema(ma.SQLAlchemyAutoSchema):
+class ProfessorSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Professor
         include_fk = True
