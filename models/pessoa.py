@@ -47,3 +47,9 @@ class Professor(db.Model):
     __tablename__ = "professor"
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     id_pessoa = db.Column(db.Integer, db.ForeignKey('pessoa.id'), nullable=False)
+
+    def check_professor(self, email):
+        user = Pessoa.query.filter_by(email=email).first()
+        trainner = Professor.query.filter_by(id_pessoa=user.id).first()
+        if not trainner:
+            return jsonify({"msg": "Usuário sem permissão."}), 408

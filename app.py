@@ -1,4 +1,3 @@
-import datetime
 from app import app
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -8,8 +7,8 @@ from schemas.pessoa import PessoaSchema
 from schemas.treino import TreinoSchema
 from werkzeug.security import generate_password_hash
 
-@app.route("/cadastrar", methods=["POST"])
-def cadastrar():
+@app.route("/cadastrar/usuario", methods=["POST"])
+def cadastrar_usuario():
     # Vars to commit
     nome = request.json.get("nome", None)
     senha = generate_password_hash(request.json.get("senha", None))
@@ -52,6 +51,27 @@ def cadastrar():
 
     return jsonify(user_created=email), 200
 
+@app.route("/cadastrar/musculo", methods=["POST"])
+def cadastrar_musculo():
+    pass
+
+@app.route("/cadastrar/ficha", methods=["POST"])
+def cadastrar_ficha():
+    pass
+
+@app.route("/cadastrar/exercicio", methods=["POST"])
+def cadastrar_exercicio():
+    pass
+
+@app.route("/cadastrar/treino", methods=["POST"])
+@jwt_required()
+def cadastrar_treino():
+    email = get_jwt_identity()
+    trainner = Professor()
+    trainner.check_professor(email)
+
+    return "ok"
+
 @app.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email", None)
@@ -84,8 +104,9 @@ def perfil():
 @jwt_required()
 def treino():
     email = get_jwt_identity()
+    user = Pessoa.query.filter_by(email=email).first()
     training_schema = TreinoSchema()
-    training = Treino.query.filter_by(email=email)
+    training = Treino.query.filter_by(id=email)
     return training_schema.dump(training), 200
 
 if __name__ == "__main__":
