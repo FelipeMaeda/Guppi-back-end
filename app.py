@@ -111,7 +111,7 @@ def treino():
 
 @app.route("/about", methods=["GET"])
 def sobre():
-    return jsonify(mestres="Danilo Urtado, Diego Vieira, Felipe Maeda, Jose Souza, Lucas Cassiano, Vitor R. Jorge", projeto="backend=https://github.com/FelipeMaeda/Guppi-back-end, frontend=https://github.com/FelipeMaeda/Guppi-front-end.git"), 200
+    return jsonify(mestres="Danilo Urtado, Diego Vieira, Felipe Maeda, Jose Souza, Lucas Cassiano, Vitor R. Jorge", projeto="backend=https://github.com/FelipeMaeda/Guppi-back-end, frontend=https://github.com/TecnoJhow/AppGuppi"), 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5001")
