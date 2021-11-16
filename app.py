@@ -129,7 +129,7 @@ def sobre():
 @app.route("/treinamento/salvar", methods=["GET"])
 def treinamento_salvar():
     nm_maquina = request.args.get('nm_maquina')
-    repeticoes = request.args.get('sensor_nivel')
+    repeticoes = request.args.get('repeticoes')
     sensor_giroscopio = request.args.get('sensor_giroscopio')
     print(nm_maquina)
     print(repeticoes)
