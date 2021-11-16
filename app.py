@@ -141,7 +141,5 @@ def token_maquina():
     user = Pessoa.query.filter_by(email=email).first()
     student = Aluno.query.filter_by(id_pessoa=user.id).first()
 
-
-print(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5001")
