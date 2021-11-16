@@ -1,10 +1,9 @@
-import datetime
-
+from datetime import datetime
 from app import app
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from models.pessoa import Pessoa, Aluno, Professor, db
-from models.treino import Treino, Ficha, Ficha_exercicio
+from models.treino import Treino, Ficha, Ficha_exercicio, Serie
 from schemas.pessoa import PessoaSchema
 from schemas.treino import TreinoSchema
 from werkzeug.security import generate_password_hash
@@ -131,11 +130,18 @@ def treinamento_salvar():
     nm_maquina = request.args.get('nm_maquina')
     repeticoes = request.args.get('repeticoes')
     sensor_giroscopio = request.args.get('sensor_giroscopio')
-    print(nm_maquina)
-    print(repeticoes)
-    print(sensor_giroscopio)
-    print(datetime.date)
+    now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
     return "ok", 200
 
+@app.route("/token/maquina", methods=["GET"])
+@jwt_required()
+def token_maquina():
+    email = get_jwt_identity()
+    user = Pessoa.query.filter_by(email=email).first()
+    student = Aluno.query.filter_by(id_pessoa=user.id).first()
+
+
+print(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5001")

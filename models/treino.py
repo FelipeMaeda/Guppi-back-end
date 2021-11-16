@@ -41,6 +41,7 @@ class Serie(db.Model):
     sensorgiroscopio = db.Column(db.Integer)
     repeticoes = db.Column(db.Integer)
     data = db.Column(db.DateTime)
+    token = db.Column(db.String(400), unique=True)
 
 class Treino(db.Model):
     __tablename__ = "treino"
