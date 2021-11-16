@@ -1,3 +1,5 @@
+import datetime
+
 from app import app
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -72,15 +74,6 @@ def cadastrar_treino():
 
     return "ok"
 
-@app.route("/cadastrar/treino", methods=["POST"])
-@jwt_required()
-def cadastrar_treino():
-    email = get_jwt_identity()
-    trainner = Professor()
-    trainner.check_professor(email)
-
-    return "ok"
-
 @app.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email", None)
@@ -141,8 +134,8 @@ def treinamento_salvar():
     print(nm_maquina)
     print(repeticoes)
     print(sensor_giroscopio)
-
-    return "ok"
+    print(datetime.date)
+    return "ok", 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5001")
