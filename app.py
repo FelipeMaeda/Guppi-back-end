@@ -72,6 +72,15 @@ def cadastrar_treino():
 
     return "ok"
 
+@app.route("/cadastrar/treino", methods=["POST"])
+@jwt_required()
+def cadastrar_treino():
+    email = get_jwt_identity()
+    trainner = Professor()
+    trainner.check_professor(email)
+
+    return "ok"
+
 @app.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email", None)
@@ -105,13 +114,35 @@ def perfil():
 def treino():
     email = get_jwt_identity()
     user = Pessoa.query.filter_by(email=email).first()
+    student = Aluno.query.filter_by(id_pessoa=user.id).first()
+    if not student:
+        return jsonify(error="Please select a Student User."), 412
     training_schema = TreinoSchema()
-    training = Treino.query.filter_by(id=email)
+    training = Treino.query.filter_by(id_aluno=student.id)
     return training_schema.dump(training), 200
 
 @app.route("/about", methods=["GET"])
 def sobre():
-    return jsonify(mestres="Danilo Urtado, Diego Vieira, Felipe Maeda, Jose Souza, Lucas Cassiano, Vitor R. Jorge", projeto="backend=https://github.com/FelipeMaeda/Guppi-back-end, frontend=https://github.com/TecnoJhow/AppGuppi"), 200
+    return jsonify(
+        mestres="Danilo Urtado,"
+                "Diego Vieira,"
+                "Felipe Maeda,"
+                "Jose Souza,"
+                "Lucas Cassiano,"
+                "Vitor R. Jorge",
+        projeto="backend=https://github.com/FelipeMaeda/Guppi-back-end, frontend=https://github.com/TecnoJhow/AppGuppi"
+    ), 200
+
+@app.route("/treinamento/salvar", methods=["GET"])
+def training():
+    nm_maquina = request.args.get('nm_maquina')
+    repeticoes = request.args.get('sensor_nivel')
+    sensor_giroscopio = request.args.get('sensor_giroscopio')
+    print(nm_maquina)
+    print(repeticoes)
+    pritn(sensor_giroscopio)
+
+    return "ok"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5001")
