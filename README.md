@@ -4,7 +4,7 @@ Guppi-backend is the back-end code from de app Guppi. This project is associated
 ![alt-text](prototype.gif)
 
 # Installation
-To install this application you will need Python and free Mysql. 
+To install this application you will need **Python 3.9** and free Mysql. 
 
 ### For Windows
 Clone this repo and install the dependencies.
@@ -15,6 +15,7 @@ cd .\Guppi-backend\
 python -m venv .\venv
 .\venv\Scripts\activate.bat
 pip install -r requirements.txt
+SET SQLALCHEMY_DATABASE_URI='mysql://User:Password@uri_server.com:3306/database'
 ```
 
 ### For Linux
@@ -23,9 +24,10 @@ Clone this repo and install the dependencies.
 ```sh
 git clone https://github.com/FelipeMaeda/Guppi-backend.git
 cd ./Guppi-backend
-python -m venv ./venv
+python3 -m venv ./venv
 source ./venv/Scripts/activate
-pip install -r requirements.txt
+pip3 install -r requirements.txt
+export SQLALCHEMY_DATABASE_URI='mysql://User:Password@uri_server.com:3306/database'
 ```
 
 # Usage
