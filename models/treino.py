@@ -41,7 +41,6 @@ class Serie(db.Model):
     sensorgiroscopio = db.Column(db.Integer)
     repeticoes = db.Column(db.Integer)
     data = db.Column(db.DateTime)
-    token = db.Column(db.String(400), unique=True)
 
 class Treino(db.Model):
     __tablename__ = "treino"
@@ -52,3 +51,8 @@ class Treino(db.Model):
     id_musculo = db.Column(db.Integer, db.ForeignKey('musculo.id'), nullable=False)
     id_serie = db.Column(db.Integer, db.ForeignKey('serie.id'), nullable=False)
     finalizada = db.Column(db.Boolean)
+
+class Token(db.Model):
+    __tablename__ = "token"
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    token = db.Column(db.String(400), unique=True)
