@@ -25,7 +25,7 @@ Clone this repo and install the dependencies.
 git clone https://github.com/FelipeMaeda/Guppi-backend.git
 cd ./Guppi-backend
 python3 -m venv ./venv
-source ./venv/Scripts/activate
+source ./venv/bin/activate
 pip3 install -r requirements.txt
 export SQLALCHEMY_DATABASE_URI='mysql://User:Password@uri_server.com:3306/database'
 ```

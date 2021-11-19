@@ -9,7 +9,13 @@ from schemas.treino import TreinoSchema
 from werkzeug.security import generate_password_hash
 
 @app.route("/cadastrar/usuario", methods=["POST"])
+@jwt_required()
 def cadastrar_usuario():
+    email = get_jwt_identity()
+    user = Pessoa.query.filter_by(email=email).first()
+    teacher = Professor.query.filter_by(id_pessoa=user.id).first()
+    if not teacher:
+        return jsonify(error="Please select a Student User."), 412
     # Vars to commit
     nome = request.json.get("nome", None)
     senha = generate_password_hash(request.json.get("senha", None))
@@ -131,7 +137,9 @@ def treinamento_salvar():
     repeticoes = request.args.get('repeticoes')
     sensor_giroscopio = request.args.get('sensor_giroscopio')
     now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
+    serie = Serie(nm_maquina=nm_maquina, repeticoes=repeticoes, sensorgiroscopio=sensor_giroscopio, data=now)
+    db.session.add(serie)
+    db.session.commit()
     return "ok", 200
 
 @app.route("/token/maquina", methods=["GET"])

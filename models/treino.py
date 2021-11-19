@@ -39,6 +39,7 @@ class Serie(db.Model):
     serie = db.Column(db.Integer)
     id_aluno = db.Column(db.Integer, db.ForeignKey('aluno.id'))
     sensorgiroscopio = db.Column(db.Integer)
+
     repeticoes = db.Column(db.Integer)
     data = db.Column(db.DateTime)
 
