@@ -136,7 +136,7 @@ def treinamento_salvar():
     nm_maquina = request.args.get('nm_maquina')
     repeticoes = request.args.get('repeticoes')
     sensor_giroscopio = request.args.get('sensor_giroscopio')
-    now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    now = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     serie = Serie(nm_maquina=nm_maquina, repeticoes=repeticoes, sensorgiroscopio=sensor_giroscopio, data=now)
     db.session.add(serie)
     db.session.commit()
