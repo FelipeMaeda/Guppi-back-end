@@ -15,7 +15,7 @@ def cadastrar_usuario():
     user = Pessoa.query.filter_by(email=email).first()
     teacher = Professor.query.filter_by(id_pessoa=user.id).first()
     if not teacher:
-        return jsonify(error="Please select a Student User."), 412
+        return jsonify(error="You need privileges to register a user."), 412
     # Vars to commit
     nome = request.json.get("nome", None)
     senha = generate_password_hash(request.json.get("senha", None))
