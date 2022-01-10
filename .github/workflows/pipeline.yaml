@@ -27,7 +27,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       # Step 5
       - name: Build Application and Run unit Test
-        run: python app.py & pytest
+        run: cat /etc/*release
 
   continuous-deployment:
     runs-on: ubuntu-latest
