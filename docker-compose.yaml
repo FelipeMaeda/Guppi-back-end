@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  guppi-back-end:
+    build: .
+    image: guppi-back-end:1.0.0
+    container_name: guppi-back-end
+    ports:
+      - "5001:5001"
+    environment:
+      JWT_SECRET_KEY: SECRET_KEY_VALUE
+      SQLALCHEMY_DATABASE_URI: SQLALCHEMY_DATABASE_VALUE
+    networks:
+      - backend
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql/mysql:latest
+    ports:
+      - "6603:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ROOT_PASS_VALUE
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: db-connection
+    driver: default
