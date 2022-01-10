@@ -24,9 +24,8 @@ jobs:
           role-to-assume: arn:aws:iam::989069758256:role/EC2-CodeDeploy
           role-session-name: githubActionsCI
           aws-region: us-east-2
-#          aws-access-key-id:${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws-secret-access-key:${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # aws-region: us-east-2
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       # Step 5
       - name: Build Application and Run unit Test
         run: python app.py & pytest
