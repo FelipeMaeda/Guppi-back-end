@@ -28,4 +28,3 @@ services:
 networks:
   backend:
     name: db-connection
-    driver: default
