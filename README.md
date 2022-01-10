@@ -36,7 +36,7 @@ cd .\Guppi-back-end\
 python -m venv .\venv
 .\venv\Scripts\activate.bat
 pip install -r requirements.txt
-SET SQLALCHEMY_DATABASE_URI='mysql://User:Password@uri_server.com:3306/database'
+set SQLALCHEMY_DATABASE_URI='mysql://User:Password@uri_server.com:3306/database'
 ```
 
 # Usage
