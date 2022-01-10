@@ -38,15 +38,16 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::989069758256:role/EC2-CodeDeploy
-          role-session-name: githubActionCD
+          role-session-name: githubActionsCD
           aws-region: us-east-2
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
      # Step 2
       - name: Create CodeDeploy Deployment
         id: deploy
         run: |
           aws deploy create-deployment \
-            --application-name application-name \
-            --deployment-group-name AppDeploymentGroupName \
+            --application-name guppi \
+            --deployment-group-name Guppi-deployment-name \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
