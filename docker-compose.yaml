@@ -8,7 +8,7 @@ services:
       - "5001:5001"
     environment:
       JWT_SECRET_KEY: SECRET_KEY_VALUE
-      SQLALCHEMY_DATABASE_URI: SQLALCHEMY_DATABASE_VALUE
+      SQLALCHEMY_DATABASE_URI: mysql://root:secret@mysql:3306/guppi
     networks:
       - backend
     links:
@@ -21,7 +21,11 @@ services:
     ports:
       - "6603:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ROOT_PASS_VALUE
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: guppi
+      MYSQL_USER: guppi-user
+      MYSQL_PASSWORD: secret
     networks:
       - backend
 
