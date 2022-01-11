@@ -11,10 +11,6 @@ services:
       SQLALCHEMY_DATABASE_URI: mysql://root:secret@mysql:3306/guppi
     networks:
       - backend
-    links:
-      - mysql
-    depends_on:
-      - mysql
 
   mysql:
     image: mysql/mysql-server:latest
@@ -29,6 +25,8 @@ services:
     networks:
       - backend
     links:
+      - guppi-back-end
+    depends_on:
       - guppi-back-end
 
 networks:
