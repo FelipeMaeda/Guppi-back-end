@@ -6,7 +6,6 @@ COPY . .
 RUN addgroup -S guppi && adduser -S guppi_user -G guppi
 RUN chown guppi_user:guppi -R /home/app
 RUN pip install --no-cache-dir -r requirements.txt
-RUN flask db init && flask db migrate && flask db upgrade
 
 USER guppi_user
 

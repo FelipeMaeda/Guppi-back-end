@@ -11,6 +11,7 @@ services:
       SQLALCHEMY_DATABASE_URI: mysql://root:secret@mysql:3306/guppi
     networks:
       - backend
+    command: flask db init && flask db migrate && flask db upgrade
 
   mysql:
     image: mysql/mysql-server:latest

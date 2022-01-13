@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 
 jobs:
-  continuous-integration:
+  Build_and_test:
     runs-on: ubuntu-latest
     steps:
       # Step 1
