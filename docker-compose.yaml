@@ -12,8 +12,7 @@ services:
     networks:
       - backend
       - frontend
-#    command: which python
-#    command: python app.py db init && python app.py db migrate && python app.py db upgrade
+    command: /usr/local/bin/python /home/app/app.py db init && /usr/local/bin/python /home/app/app.py db migrate && /usr/local/bin/python /home/app/app.py db upgrade
     depends_on:
       - mysql
 
