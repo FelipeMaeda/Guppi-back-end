@@ -4,8 +4,12 @@ WORKDIR /home/app
 
 COPY . .
 RUN addgroup -S guppi && adduser -S guppi_user -G guppi
-RUN chown guppi_user:guppi -R /home/app
 RUN pip install --no-cache-dir -r requirements.txt
+RUN ln -s /usr/local/bin/python /usr/bin
+RUN chown guppi_user:guppi -R /home/app && chown guppi_user:guppi /usr/bin/python
+RUN python app.py db init \
+    python app.py db migrate \
+    python app.py db upgrade
 
 USER guppi_user
 
