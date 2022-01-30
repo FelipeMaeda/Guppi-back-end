@@ -46,8 +46,8 @@ jobs:
       - name: Create CodeDeploy Deployment
         id: deploy
         run: |
-          aws deploy create-deployment \
-            --application-name guppi \
-            --deployment-group-name Guppi-deployment-name \
-            --deployment-config-name CodeDeployDefault.OneAtATime \
-            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+          aws ssm send-command \
+            --instance-ids "i-074bddbf7dce11823" \
+            --document-name "Deploy-guppi" \
+            --parameters commands='cd /home/ec2-user/Guppi-back-end && git push' \
+            --output text
