@@ -128,7 +128,7 @@ def sobre():
                 "Jose Souza,"
                 "Lucas Cassiano,"
                 "Vitor R. Jorge",
-        projeto="backend=https://github.com/FelipeMaeda/Guppi-back-end, frontend=https://github.com/TecnoJhow/AppGuppi"
+        projeto="backend=https://github.com/FelipeMaeda/Guppi-back-end, frontend=https://github.com/TecnoJhow/New-Guppi"
     ), 200
 
 @app.route("/treinamento/salvar", methods=["GET"])
