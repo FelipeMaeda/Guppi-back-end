@@ -12,7 +12,6 @@ services:
     networks:
       - backend
       - frontend
-    command: /usr/local/bin/python /home/app/app.py db init && /usr/local/bin/python /home/app/app.py db migrate && /usr/local/bin/python /home/app/app.py db upgrade
     depends_on:
       - mysql
 
