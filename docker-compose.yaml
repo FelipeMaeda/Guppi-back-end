@@ -17,7 +17,7 @@ services:
       - mysql
 
   mysql:
-    image: mysql/mysql-server:latest
+    image: mysql:latest
     ports:
       - "6603:3306"
     environment:

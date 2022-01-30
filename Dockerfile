@@ -5,9 +5,9 @@ WORKDIR /home/app
 COPY . .
 RUN addgroup -S guppi && adduser -S guppi_user -G guppi
 RUN chown guppi_user:guppi -R /home/app
-RUN pip install --no-cache-dir -r requirements.txt
-
 USER guppi_user
+RUN pip install --no-cache-dir -r requirements.txt
+RUN ln -s /usr/local/bin/python /bin
 
 HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost:5001/about || exit 1
 
