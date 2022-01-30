@@ -12,7 +12,7 @@ services:
     networks:
       - backend
       - frontend
-    command: which python
+#    command: which python
 #    command: python app.py db init && python app.py db migrate && python app.py db upgrade
     depends_on:
       - mysql
