@@ -7,22 +7,22 @@ services:
     ports:
       - "5001:5001"
     environment:
-      JWT_SECRET_KEY: SECRET_KEY_VALUE
-      SQLALCHEMY_DATABASE_URI: mysql://root:secret_123@mysql:3306/guppi
+      JWT_SECRET_KEY: "SECRET_KEY_VALUE"
+      SQLALCHEMY_DATABASE_URI: "mysql://root:secret_123@mysql:6603/guppi"
     networks:
       - backend
       - frontend
-    command: python app.py db init && python app.py db migrate && python app.py db upgrade
+#    command: python app.py db init && python app.py db migrate && python app.py db upgrade
     depends_on:
       - mysql
 
   mysql:
-    environment:
-      MYSQL_ROOT_PASSWORD: secret_123
-      MYSQL_DATABASE: guppi
     image: mysql/mysql-server:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "secret_123"
+      MYSQL_DATABASE: "guppi"
     ports:
-      - "3306:3306"
+      - "6603:3306"
     volumes:
       - /opt/guppi/:/var/lib/mysql
     networks:
