@@ -2,30 +2,33 @@ version: "3.9"
 services:
   guppi-back-end:
     build: .
-    image: guppi-back-end:1.0.0
+    image: guppi-back-end:latest
     container_name: guppi-back-end
     ports:
       - "5001:5001"
     environment:
       JWT_SECRET_KEY: SECRET_KEY_VALUE
-      SQLALCHEMY_DATABASE_URI: mysql://guppi:secret_123@mysql:6603/guppi
+      SQLALCHEMY_DATABASE_URI: mysql://root:secret_123@mysql:3303/guppi
     networks:
       - backend
-    command: flask db init && flask db migrate && flask db upgrade
+      - frontend
+    command: python app.py db init && python app.py db migrate && python app.py db upgrade
     depends_on:
       - mysql
 
   mysql:
     image: mysql/mysql-server:latest
     ports:
-      - "6603:3306"
+      - "3303:3306"
     environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret_123
       MYSQL_DATABASE: guppi
-      MYSQL_USER: guppi
-      MYSQL_PASSWORD: secret_123
     networks:
       - backend
 
 networks:
   backend:
     name: db-connection
+  frontend:
+    name: front-end
