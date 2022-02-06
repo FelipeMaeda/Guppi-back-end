@@ -15,6 +15,15 @@ cd .\Guppi-back-end\
 docker image build -e SQLALCHEMY_DATABASE_URI='mysql://User:Password@uri_server.com:3306/database' -t guppi:1.0.0 .
 ```
 
+# Docker Compose
+Execute only this command in your server to Up the Mysql Docker and the API REST Guppi-back-end.
+
+```sh
+git clone https://github.com/FelipeMaeda/Guppi-backend.git
+cd .\Guppi-back-end\
+docker-compose up -d
+```
+
 ### For Linux
 Clone this repo and install the dependencies.
 
