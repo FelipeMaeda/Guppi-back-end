@@ -4,7 +4,6 @@ Guppi-backend is the back-end code from de app Guppi. This project is associated
 ![alt-text](prototype.gif)
 
 # Installation
-To install this application you will need **Python 3.9** and free Mysql. 
 
 ### Docker
 Execute this command in your server do build a image from this app.
@@ -23,6 +22,9 @@ git clone https://github.com/FelipeMaeda/Guppi-backend.git
 cd .\Guppi-back-end\
 docker-compose up -d
 ```
+
+# Manual Installation
+To install this application you will need **Python 3.9** and free Mysql. 
 
 ### For Linux
 Clone this repo and install the dependencies.
