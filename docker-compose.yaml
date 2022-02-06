@@ -16,7 +16,7 @@ services:
       mysql:
         condition:
           service_healthy
-#    command: python flask db init && python flask db migrate && python flask db upgrade
+    command: app.py db init && app.py db migrate && app.py db upgrade
 
   mysql:
     image: mysql:latest
