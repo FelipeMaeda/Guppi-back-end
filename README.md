@@ -6,7 +6,7 @@ Guppi-backend is the back-end code from de app Guppi. This project is associated
 # Installation
 To install this application you will need **Python 3.9** and free Mysql. 
 
-# Docker
+### Docker
 Execute this command in your server do build a image from this app.
 
 ```sh
@@ -15,7 +15,7 @@ cd .\Guppi-back-end\
 docker image build -e SQLALCHEMY_DATABASE_URI='mysql://User:Password@uri_server.com:3306/database' -t guppi:1.0.0 .
 ```
 
-# Docker Compose
+### Docker Compose
 Execute only this command in your server to Up the Mysql Docker and the API REST Guppi-back-end.
 
 ```sh
