@@ -27,7 +27,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       # Step 5
       - name: Build Application and Run unit Test
-        run: cat /etc/*release
+        run: |
+          export SQLALCHEMY_DATABASE_URI='mysql://User:Password@uri_server.com:3306/database'
+          python app.py
+          curl localhost:5001/about
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,8 +49,4 @@ jobs:
       - name: Create CodeDeploy Deployment
         id: deploy
         run: |
-          aws ssm send-command \
-            --instance-ids "i-074bddbf7dce11823" \
-            --document-name "Deploy-guppi" \
-            --parameters commands='cd /home/ec2-user/Guppi-back-end && git push' \
-            --output text
+          test
